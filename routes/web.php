@@ -15,3 +15,7 @@ use App\Http\Controllers\JobController;
 */
 
 Route::resource('jobs', JobController::class)->only(['index', 'show']);
+Route::get('/', function () {
+    $users = \App\Models\User::all()->shuffle();
+    return $users;
+});

@@ -13,6 +13,7 @@ class Job extends Model
 
     public static array $experience =  ['entry', 'intermediate', 'senior'];
     public static array $category  = ['It', 'Finance', 'sales', 'Marketing'];
+
     public function scopeFilter(Builder|QueryBuilder $query, array $filters): Builder|QueryBuilder
     {
         return $query->when($filters['search'] ?? null, function ($query, $search) {
@@ -29,5 +30,11 @@ class Job extends Model
         })->when($filters['category'] ?? null, function ($query, $category) {
             $query->where('category', $category);
         });
+    }
+
+
+    public function employer()
+    {
+        return $this->belongsTo(Employer::class);
     }
 }
